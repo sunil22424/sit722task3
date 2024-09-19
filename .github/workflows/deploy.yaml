@@ -9,7 +9,31 @@ name: Deploy microservice
 
 on:
   #
-  # Deploys the microservice on push to the main branch of this code repository.
+  # Deploys the microservice on push to the main branch of this code repositname: Deploy microservice
+
+on:
+  push: 
+    branches:
+      - main
+  workflow_dispatch: 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    env:
+      VERSION: ${{ github.sha }}
+      CONTAINER_REGISTRY: ${{ secrets.CONTAINER_REGISTRY }}
+      REGISTRY_UN: ${{ secrets.REGISTRY_UN }}
+      REGISTRY_PW: ${{ secrets.REGISTRY_PW }}
+
+    steps:
+      # Check-out repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Debugging
+ory.
   #
   push: 
     branches:
